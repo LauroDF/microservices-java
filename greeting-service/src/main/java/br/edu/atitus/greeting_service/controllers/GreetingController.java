@@ -1,12 +1,14 @@
 package br.edu.atitus.greeting_service.controllers;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.atitus.greeting_service.configs.GreetingConfig;
+import java.util.Map;
 
 @RestController
 @RequestMapping("greeting")
@@ -32,4 +34,20 @@ public class GreetingController {
 		
 		return ResponseEntity.ok(textReturn);
 	}
+	
+	// GET com PathVariable /greeting/{name}
+    @GetMapping("/{name}")
+    public ResponseEntity<String> greetPath(@PathVariable String name) {
+        String textReturn = String.format("%s, %s !!!", config.getGreeting(), name);
+        return ResponseEntity.ok(textReturn);
+    }
+
+    
+    // POST recebendo JSON {"name": "..."}
+    @PostMapping
+    public ResponseEntity<String> greetPost(@RequestBody Map<String, String> body) {
+        String name = body.getOrDefault("name", config.getDefaultName());
+        String textReturn = String.format("%s, %s !!!", config.getGreeting(), name);
+        return ResponseEntity.ok(textReturn);
+    }
 }
