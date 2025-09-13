@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.atitus.greeting_service.configs.GreetingConfig;
+import br.edu.atitus.greeting_service.dtos.GreetingDTO;
+
 import java.util.Map;
 
 @RestController
@@ -35,19 +37,20 @@ public class GreetingController {
 		return ResponseEntity.ok(textReturn);
 	}
 	
-	// GET com PathVariable /greeting/{name}
-    @GetMapping("/{name}")
-    public ResponseEntity<String> greetPath(@PathVariable String name) {
-        String textReturn = String.format("%s, %s !!!", config.getGreeting(), name);
-        return ResponseEntity.ok(textReturn);
+	// GET com PathVariable /greeting/{namePath}
+    @GetMapping("/{namePath}")
+    public ResponseEntity<String> greetPath(@PathVariable String namePath) {
+        // String textReturn = String.format("%s, %s !!!", config.getGreeting(), name);
+        return greet(namePath); //ResponseEntity.ok(textReturn);
     }
 
     
     // POST recebendo JSON {"name": "..."}
     @PostMapping
-    public ResponseEntity<String> greetPost(@RequestBody Map<String, String> body) {
-        String name = body.getOrDefault("name", config.getDefaultName());
-        String textReturn = String.format("%s, %s !!!", config.getGreeting(), name);
+    public ResponseEntity<String> save(@RequestBody GreetingDTO dto) {
+        String greetingReturn = config.getGreeting();
+        String nameReturn = dto.name();
+        String textReturn = String.format("%s, %s !!!", greetingReturn, nameReturn);
         return ResponseEntity.ok(textReturn);
     }
 }
