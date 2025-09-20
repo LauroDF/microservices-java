@@ -1,5 +1,6 @@
 package br.edu.atitus.currency_service.controllers;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,9 @@ import br.edu.atitus.currency_service.repositories.CurrencyRepository;
 public class CurrencyController {
 	
 	private final CurrencyRepository repository;
+	
+	@Value("${server.port}")
+	private int serverPort;
 
 	public CurrencyController(CurrencyRepository repository) {
 		super();
@@ -29,6 +33,9 @@ public class CurrencyController {
 		CurrencyEntity currency = repository.
 				findBySourceAndTarget(source, target)
 				.orElseThrow(() -> new Exception("Currency not found"));
+		
+		currency.setConvertedValue(value * currency.getConversionRate());
+		currency.setEnvironment("Currency running in port: " + serverPort);
 		
 		return ResponseEntity.ok(currency);
 		

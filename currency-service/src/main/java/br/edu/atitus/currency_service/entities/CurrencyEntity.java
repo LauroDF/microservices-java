@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity@Table(name= "tb_currency")
 public class CurrencyEntity {
@@ -18,6 +19,26 @@ public class CurrencyEntity {
 	private String target;
 	@Column(name= "conversion_rate")
 	private double conversionRate;
+	
+	@Transient
+	private double convertedValue;
+	@Transient
+	private String environment;
+	
+	
+	
+	public double getConvertedValue() {
+		return convertedValue;
+	}
+	public void setConvertedValue(double convertedValue) {
+		this.convertedValue = convertedValue;
+	}
+	public String getEnvironment() {
+		return environment;
+	}
+	public void setEnvironment(String environment) {
+		this.environment = environment;
+	}
 	public Long getId() {
 		return id;
 	}
