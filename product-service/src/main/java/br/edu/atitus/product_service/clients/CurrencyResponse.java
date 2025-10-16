@@ -1,67 +1,31 @@
 package br.edu.atitus.product_service.clients;
 
 public class CurrencyResponse {
-	
-	private Long id;
-	
-	private String source;
-	
-	private String target;
-	
-	private double conversionRate;
-	
-	private double convertedValue;
-	
-	private String enviroment;
 
-	public Long getId() {
-		return id;
-	}
+    private Long id;
+    private String from;
+    private String to;
+    private Double conversionFactor;
+    private Double convertedValue;
+    private String enviroment;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public CurrencyResponse() {}
 
-	public String getSource() {
-		return source;
-	}
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-	public void setSource(String source) {
-		this.source = source;
-	}
+    public String getFrom() { return from; }
+    public void setFrom(String from) { this.from = from; }
 
-	public String getTarget() {
-		return target;
-	}
+    public String getTo() { return to; }
+    public void setTo(String to) { this.to = to; }
 
-	public void setTarget(String target) {
-		this.target = target;
-	}
+    public Double getConversionFactor() { return conversionFactor; }
+    public void setConversionFactor(Double conversionFactor) { this.conversionFactor = conversionFactor; }
 
-	public double getConversionRate() {
-		return conversionRate;
-	}
+    public Double getConvertedValue() { return convertedValue; }
+    public void setConvertedValue(Double convertedValue) { this.convertedValue = convertedValue; }
 
-	public void setConversionRate(double conversionRate) {
-		this.conversionRate = conversionRate;
-	}
-
-	public double getConvertedValue() {
-		return convertedValue;
-	}
-
-	public void setConvertedValue(double convertedValue) {
-		this.convertedValue = convertedValue;
-	}
-
-	public String getEnviroment() {
-		return enviroment;
-	}
-
-	public void setEnviroment(String enviroment) {
-		this.enviroment = enviroment;
-	}
-	
-	
-
+    public String getEnviroment() { return enviroment; }
+    public void setEnviroment(String enviroment) { this.enviroment = enviroment; }
 }
